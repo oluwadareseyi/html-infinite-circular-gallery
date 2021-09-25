@@ -88,8 +88,9 @@ export default class extends Component {
 
   transform(element, x, rotation = 0, normal) {
     const y = Math.abs(rotation * (normal / (window.innerWidth / 2)));
+    const ratio = window.innerWidth <= 425 ? 0.8 : 2.2;
     // prettier-ignore
-    element.style[this.transformPrefix] = `translate3d(${Math.floor(x)}px, ${y * 2.2}%, 0) rotate(${rotation}deg)`;
+    element.style[this.transformPrefix] = `translate3d(${Math.floor(x)}px, ${y * ratio}%, 0) rotate(${rotation}deg)`;
   }
 
   onResize() {

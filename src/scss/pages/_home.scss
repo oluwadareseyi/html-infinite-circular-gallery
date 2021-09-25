@@ -56,4 +56,10 @@
   flex-shrink: 0;
   background: var(--color);
   margin-right: 10rem;
+
+  @include media("<=phone") {
+    width: 20rem;
+    height: 20rem;
+    margin-right: 5rem;
+  }
 }
