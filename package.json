@@ -1,0 +1,23 @@
+{
+  "name": "profile-rebuild",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rm -rf .parcel-cache && parcel src/index.pug --open -p 3000",
+    "build": "parcel build src/index.pug --public-url ./"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@parcel/transformer-pug": "2.0.0-rc.0",
+    "@parcel/transformer-sass": "2.0.0-rc.0",
+    "auto-bind": "^4.0.0",
+    "normalize-wheel": "^1.0.1",
+    "parcel": "^2.0.0-rc.0",
+    "prefix": "^1.0.0",
+    "sass": "^1.26.8"
+  },
+  "dependencies": {
+    "gsap": "^3.7.1"
+  }
+}

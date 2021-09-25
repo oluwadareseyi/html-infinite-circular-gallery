@@ -1,0 +1,11 @@
+.navigation {
+  @extend %cover;
+
+  pointer-events: none;
+  position: fixed;
+  z-index: z("navigation");
+
+  &__item {
+    pointer-events: auto;
+  }
+}
