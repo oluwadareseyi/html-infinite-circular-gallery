@@ -10,7 +10,7 @@ export default class extends Page {
       element: ".home",
       elements: {
         list: ".home__list",
-        wrapper: ".home__list",
+        wrapper: ".home__wrapper",
         items: ".home__item",
       },
     });
@@ -34,5 +34,7 @@ export default class extends Page {
     super.onResize();
   }
 
-  update() {}
+  update() {
+    super.update();
+  }
 }

@@ -2,7 +2,6 @@ import AutoBind from "auto-bind";
 import each from "lodash/each";
 import Detection from "./classes/Detection";
 
-import Case from "./pages/Case";
 import Home from "./pages/Home";
 class App {
   constructor() {
@@ -15,20 +14,13 @@ class App {
       y: window.innerHeight / 2,
     };
 
-    this.createCase();
     this.createHome();
 
     this.pages = {
       "/": this.home,
-      "/case": this.case,
     };
 
-    if (this.url.indexOf("/case") > -1) {
-      this.page = this.case;
-      this.page.onResize();
-    } else {
-      this.page = this.pages[this.url];
-    }
+    this.page = this.pages[this.url];
 
     this.page.show(this.url);
 
@@ -41,10 +33,6 @@ class App {
 
   createHome() {
     this.home = new Home();
-  }
-
-  createCase() {
-    this.case = new Case();
   }
 
   async onChange({ push = true, url = null }) {
@@ -66,11 +54,7 @@ class App {
       window.history.pushState({}, document.title, url);
     }
 
-    if (this.url.indexOf("/case") > -1) {
-      this.page = this.case;
-    } else {
-      this.page = this.pages[this.url];
-    }
+    this.page = this.pages[this.url];
 
     await this.page.show(this.url);
 
@@ -84,10 +68,6 @@ class App {
   onResize() {
     if (this.home) {
       this.home.onResize();
-    }
-
-    if (this.case) {
-      this.case.onResize();
     }
   }
 

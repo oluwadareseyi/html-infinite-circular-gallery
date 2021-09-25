@@ -1,8 +1,4 @@
 .home {
-  @extend %cover;
-  @extend %page;
-
-  overflow: hidden;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 
   &--active {
@@ -54,7 +50,6 @@
 }
 
 .home__wrapper {
-  @extend %cover;
 }
 
 .home__list {
