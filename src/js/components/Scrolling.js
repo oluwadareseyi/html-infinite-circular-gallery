@@ -25,7 +25,6 @@ export default class extends Component {
       target: 0,
       last: 0,
       clamp: 0,
-      velocity: 1,
     };
 
     each(this.elements.items, (element) => {
@@ -41,6 +40,8 @@ export default class extends Component {
 
     this.width = this.elements.items[0].width;
     this.widthTotal = this.elements.list.getBoundingClientRect().width;
+
+    this.velocity = 2;
   }
 
   enable() {
@@ -86,7 +87,7 @@ export default class extends Component {
     this.scroll.target += speed;
   }
 
-  transform(element, x, rotation = 0, normal) {
+  transform(element, x, rotation = 0, normal = 0) {
     const y = Math.abs(rotation * (normal / (window.innerWidth / 2)));
     const ratio = window.innerWidth <= 425 ? 0.8 : 2.2;
     // prettier-ignore
@@ -95,7 +96,7 @@ export default class extends Component {
 
   onResize() {
     each(this.elements.items, (element) => {
-      this.transform(element, 0);
+      this.transform(element, 0, 0, 0);
 
       const offset = getOffset(element);
 
@@ -120,6 +121,8 @@ export default class extends Component {
   update() {
     if (!this.isEnabled) return;
 
+    this.scroll.target += this.velocity;
+
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
@@ -130,16 +133,16 @@ export default class extends Component {
 
     if (this.scroll.current < this.scroll.last) {
       this.direction = "down";
-      this.scroll.velocity = -1;
+      this.velocity = -2;
     } else {
       this.direction = "up";
-      this.scroll.velocity = 1;
+      this.velocity = 2;
     }
 
     each(this.elements.items, (element, index) => {
       element.position = -this.scroll.current - element.extra;
 
-      const offset = element.position + element.offset + element.width;
+      const offset = element.position + element.offset + element.width + 30;
 
       // if (index === 3 && this.scroll.current !== this.scroll.last) {
       const normalizedPosition =
@@ -151,8 +154,8 @@ export default class extends Component {
       this.rotation = GSAP.utils.mapRange(
         -window.innerWidth / 2,
         window.innerWidth / 2,
-        -20,
-        20,
+        -10,
+        10,
         Math.min(normalizedPosition, window.innerWidth / 2)
       );
 
